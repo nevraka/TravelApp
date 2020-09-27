@@ -1,0 +1,50 @@
+{
+  "hotels": [
+    {
+      "id": "p_hilton",
+      "name": "Hilton",
+      "city": "Paris",
+      "country": "France"
+    },
+    {
+      "id": "de_swiss",
+      "name": "Swiss",
+      "city": "Hamburg",
+      "country": "Germany"
+    },
+    {
+      "id": "de_swiss2",
+      "name": "Swiss",
+      "city": "Hamburg",
+      "country": "Germany"
+    },
+    {
+      "name": "Swiss",
+      "id": "SLAeaj6"
+    },
+    {
+      "id": "sGaz1Pw"
+    },
+    {
+      "id": "VlIfs7c"
+    },
+    {
+      "id": "cZEXSaR"
+    },
+    {
+      "name": "nevra",
+      "id": "OfukmWV"
+    },
+    {
+      "name": "nevra",
+      "id": "lniIkfN"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "hotelId": "p_hilton",
+      "text": "it was wonderful experience"
+    }
+  ]
+}
