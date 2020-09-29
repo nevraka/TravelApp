@@ -1,24 +1,32 @@
 import React from 'react';
-import List from './components/List';
-import AddNew from './components/AddNew';
-import Update from './components/Update';
+import List from './components/hotel/List';
+import Add from './components/hotel/Add';
+import Update from './components/hotel/Update';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import ListCom from './components/comments/ListCom';
+import MainPage from './MainPage';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/update/:id">
+        <Route path="/hotel/update/:id">
           <Update />
         </Route>
-        <Route path="/new_hotel">
-          <AddNew />
+        <Route path="/hotel/add">
+          <Add />
+        </Route>
+        <Route path="/hotels">
+          <List />
+          <Link to="/hotel/add">
+            <span>Add Hotel</span>
+          </Link>
+        </Route>
+        <Route path="/comments">
+          <ListCom />
         </Route>
         <Route path="/">
-          <List />
-          <Link to="/new_hotel">
-            <span>Otel Ekle</span>
-          </Link>
+          <MainPage />
         </Route>
       </Switch>
     </Router>
