@@ -1,86 +1,45 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import FormCom from './FormCom';
 
 function UpdateCom() {
-  const [results, setResults] = useState({});
+  const [comment, setComment] = useState({});
+  let { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
-    fetch('http://localhost:3000/hotels', {
+    fetch(`http://localhost:3000/comments/${id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        id: 'id',
-        hotelId: 'hotelId',
-        userId: 'userId',
-        text: '',
-        dateCreated: Date,
-      }),
     }).then((result) => {
-      setResults(result);
+      setComment(result);
     });
   }, []);
 
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    fetch(`http://localhost:3000/comments/${id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(comment),
+    }).then(() => history.push('/comments'));
+  };
+
   return (
-    <div>
-      <form>
-        <label>
-          Hotel:
-          <input
-            type="text"
-            value={results.id}
-            onChange={(e) => setResults({ ...results, id: e.target.value })}
-          />
-        </label>
-        <br />
-        <label>
-          City:
-          <input
-            type="text"
-            value={results.hotelId}
-            onChange={(e) =>
-              setResults({ ...results, hotelId: e.target.value })
-            }
-          />
-        </label>
-        <br />
-        <label>
-          Counrty:
-          <input
-            type="text"
-            value={results.userId}
-            onChange={(e) => setResults({ ...results, userId: e.target.value })}
-          />
-        </label>
-        <br />
-        <label>
-          Counrty:
-          <input
-            type="text"
-            value={results.text}
-            onChange={(e) => setResults({ ...results, text: e.target.value })}
-          />
-        </label>
-        <br />
-        <label>
-          Counrty:
-          <input
-            type="text"
-            value={results.dateCreated}
-            onChange={(e) =>
-              setResults({ ...results, dateCreated: e.target.value })
-            }
-          />
-        </label>
-        <br />
-        <input type="submit" value="Update" />
-        <Link to="/hotels">
-          <button>Back</button>
-        </Link>
-      </form>
-    </div>
+    <FormCom
+      buttonText="Update"
+      handleSubmit={handleSubmit}
+      comment={comment}
+      setComment={setComment}
+    />
   );
 }
 
