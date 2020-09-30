@@ -1,17 +1,40 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function ListCom() {
-  const [results, setResults] = useState([]);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
-    fetch('http://localhost:3000/hotels')
+    fetch('http://localhost:3000/comments')
       .then((response) => response.json())
-      .then((hotels) => {
-        setResults(hotels);
+      .then((results) => {
+        setComments(results);
+      });
+  };
+
+  const handleDelete = async (id) => {
+    fetch(`http://localhost:3000/comments/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          const remaining = comments.filter((c) => id !== c.id);
+          setComments(remaining);
+        } else {
+          throw `status code: ${response.status}`;
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+        alert('An error accured');
       });
   };
 
@@ -28,21 +51,23 @@ function ListCom() {
           </tr>
         </thead>
         <tbody>
-          {results.map((result) => {
-            // const deleteHotel = () => handleDelete(result.id);
+          {comments.map((comment) => {
+            const deleteComment = () => handleDelete(comment.id);
             return (
               <tr>
-                <td>{result.id}</td>
-                <td>{result.hotelId}</td>
-                <td>{result.userId}</td>
-                <td>{result.text}</td>
-                <td>{result.dateCreated}</td>
+                <td>{comment.id}</td>
+                <td>{comment.hotelId}</td>
+                <td>{comment.userId}</td>
+                <td>{comment.text}</td>
+                <td>{comment.dateCreated}</td>
                 <td>
-                  {/* <Link to={`/hotel/update/${result.id}`}>
+                  <Link to={`/comments/update/${comment.id}`}>
                     <button>Update</button>
-                  </Link> */}
+                  </Link>
                 </td>
-                <td>{/* <button onClick={deleteHotel}>Delete</button> */}</td>
+                <td>
+                  <button onClick={deleteComment}>Delete</button>
+                </td>
               </tr>
             );
           })}
