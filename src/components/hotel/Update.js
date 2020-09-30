@@ -31,7 +31,7 @@ function Update() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(hotel),
-    }).then(() => history.push('/'));
+    }).then(() => history.push('/hotels'));
   };
 
   return (

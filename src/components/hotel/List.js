@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function List() {
-  const [results, setResults] = useState([]);
+  const [hotels, setHotels] = useState([]);
 
   useEffect(() => {
     loadData();
@@ -11,8 +11,8 @@ function List() {
   const loadData = async () => {
     fetch('http://localhost:3000/hotels')
       .then((response) => response.json())
-      .then((hotels) => {
-        setResults(hotels);
+      .then((results) => {
+        setHotels(results);
       });
   };
 
@@ -26,8 +26,8 @@ function List() {
     })
       .then((response) => {
         if (response.status === 200) {
-          const remaining = results.filter((h) => id !== h.id);
-          setResults(remaining);
+          const remaining = hotels.filter((h) => id !== h.id);
+          setHotels(remaining);
         } else {
           throw `status code: ${response.status}`;
         }
@@ -50,16 +50,16 @@ function List() {
           </tr>
         </thead>
         <tbody>
-          {results.map((result) => {
-            const deleteHotel = () => handleDelete(result.id);
+          {hotels.map((hotel) => {
+            const deleteHotel = () => handleDelete(hotel.id);
             return (
               <tr>
-                <td>{result.id}</td>
-                <td>{result.name}</td>
-                <td>{result.city}</td>
-                <td>{result.country}</td>
+                <td>{hotel.id}</td>
+                <td>{hotel.name}</td>
+                <td>{hotel.city}</td>
+                <td>{hotel.country}</td>
                 <td>
-                  <Link to={`/hotel/update/${result.id}`}>
+                  <Link to={`/hotels/update/${hotel.id}`}>
                     <button>Update</button>
                   </Link>
                 </td>
