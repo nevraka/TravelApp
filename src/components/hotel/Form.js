@@ -6,7 +6,7 @@ function Form({ handleSubmit, hotel, setHotel, buttonText }) {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Hotel:
+          Hotel
           <input
             type="text"
             value={hotel.name}
@@ -15,7 +15,7 @@ function Form({ handleSubmit, hotel, setHotel, buttonText }) {
         </label>
         <br />
         <label>
-          City:
+          City
           <input
             type="text"
             value={hotel.city}
@@ -24,7 +24,7 @@ function Form({ handleSubmit, hotel, setHotel, buttonText }) {
         </label>
         <br />
         <label>
-          Counrty:
+          Counrty
           <input
             type="text"
             value={hotel.country}
