@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import Form from './Form';
+import Formh from './Formh';
 
 function Update() {
   const [hotel, setHotel] = useState({});
@@ -36,7 +36,7 @@ function Update() {
 
   return (
     <div>
-      <Form
+      <Formh
         buttonText="Update"
         handleSubmit={handleSubmit}
         hotel={hotel}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Form from './Form';
+import Formh from './Formh';
 
 function Add() {
   const [hotel, setHotel] = useState({});
@@ -15,11 +15,11 @@ function Add() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(hotel),
-    }).then(() => history.push('/'));
+    }).then(() => history.push('/hotels'));
   };
   return (
     <div>
-      <Form
+      <Formh
         buttonText="Add"
         handleSubmit={handleSubmit}
         hotel={hotel}
