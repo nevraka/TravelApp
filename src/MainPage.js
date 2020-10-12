@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Layout, Menu } from 'antd';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+
+const { Sider, Header, Content } = Layout;
 
 function MainPage() {
   return (
     <div>
-      <Link to="/hotels">
-        <button>Hotel List</button>
-      </Link>
-      <Link to="/comments">
-        <button>Comments</button>
-      </Link>
+      <Header style={{ backgroundColor: 'blue', opacity: '0.3' }} />
+      <Content />
+      <Layout style={{ height: '100vh' }}>
+        <Sider trigger={null}>
+          <Menu theme="dark" mode="inline">
+            <Menu.Item key="1">
+              <Link to="/hotels">Hotel List</Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/comments">Comments</Link>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+      </Layout>
     </div>
   );
 }
