@@ -7,6 +7,7 @@ import ListCom from './components/comments/ListCom';
 import AddCom from './components/comments/AddCom';
 import UpdateCom from './components/comments/UpdateCom';
 import MainPage from './MainPage';
+import { Button } from 'antd';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path="/hotels">
           <List />
           <Link to="/hotels/add">
-            <span>Add Hotel</span>
+            <Button>Add Hotel</Button>
           </Link>
         </Route>
         <Route path="/comments/update/:id">
@@ -33,7 +34,7 @@ function App() {
         <Route path="/comments">
           <ListCom />
           <Link to="/comments/add">
-            <span>Add Comments</span>
+            <Button>Add Comments</Button>
           </Link>
         </Route>
         <Route path="/">
