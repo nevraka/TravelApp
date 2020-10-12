@@ -1,9 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Table } from 'antd';
+import { Button } from 'antd';
 
 function List() {
   const [hotels, setHotels] = useState([]);
 
+  const renderCell = (text, record) => (
+    <Link to={`/hotels/update/${record.id}`}>{text}</Link>
+  );
+  const columns = [
+    {
+      title: 'Hotel ID',
+      dataIndex: 'id',
+      render: renderCell,
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      render: renderCell,
+    },
+    {
+      title: 'City',
+      dataIndex: 'city',
+      render: renderCell,
+    },
+    {
+      title: 'Country',
+      dataIndex: 'country',
+      render: renderCell,
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, { id }) => (
+        <Button onClick={() => handleDelete(id)}>Delete</Button>
+      ),
+    },
+  ];
   useEffect(() => {
     loadData();
   }, []);
@@ -40,37 +75,7 @@ function List() {
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Hotel ID</th>
-            <th>Name</th>
-            <th>City</th>
-            <th>Country</th>
-          </tr>
-        </thead>
-        <tbody>
-          {hotels.map((hotel) => {
-            const deleteHotel = () => handleDelete(hotel.id);
-            return (
-              <tr>
-                <td>{hotel.id}</td>
-                <td>{hotel.name}</td>
-                <td>{hotel.city}</td>
-                <td>{hotel.country}</td>
-                <td>
-                  <Link to={`/hotels/update/${hotel.id}`}>
-                    <button>Update</button>
-                  </Link>
-                </td>
-                <td>
-                  <button onClick={deleteHotel}>Delete</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <Table columns={columns} dataSource={hotels} size="middle" />
     </div>
   );
 }

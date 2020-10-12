@@ -1,8 +1,50 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { Table } from 'antd';
+import { Button } from 'antd';
 
 function ListCom() {
   const [comments, setComments] = useState([]);
+
+  const renderCell = (text, record) => (
+    <Link to={`/comments/update/${record.id}`}>{text}</Link>
+  );
+
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      render: renderCell,
+    },
+    {
+      title: 'Hotel ID',
+      dataIndex: 'hotelId',
+      render: renderCell,
+    },
+    {
+      title: 'User ID',
+      dataIndex: 'userId',
+      render: renderCell,
+    },
+    {
+      title: 'Text',
+      dataIndex: 'text',
+      render: renderCell,
+    },
+    {
+      title: 'Date',
+      dataIndex: 'dateCreated',
+      render: renderCell,
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, { id }) => (
+        <Button onClick={() => handleDelete(id)}>Delete</Button>
+      ),
+    },
+  ];
 
   useEffect(() => {
     loadData();
@@ -39,41 +81,17 @@ function ListCom() {
   };
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Hotel ID</th>
-            <th>User ID</th>
-            <th>Text</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {comments.map((comment) => {
-            const deleteComment = () => handleDelete(comment.id);
-            return (
-              <tr>
-                <td>{comment.id}</td>
-                <td>{comment.hotelId}</td>
-                <td>{comment.userId}</td>
-                <td>{comment.text}</td>
-                <td>{comment.dateCreated}</td>
-                <td>
-                  <Link to={`/comments/update/${comment.id}`}>
-                    <button>Update</button>
-                  </Link>
-                </td>
-                <td>
-                  <button onClick={deleteComment}>Delete</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <Table
+      columns={columns}
+      dataSource={comments}
+      size="middle"
+      expandable={{
+        expandedRowRender: (record) => (
+          <p style={{ margin: 0 }}>{record.text}</p>
+        ),
+        rowExpandable: (record) => record.name !== 'Not Expandable',
+      }}
+    />
   );
 }
 
