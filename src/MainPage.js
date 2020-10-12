@@ -9,7 +9,6 @@ function MainPage() {
   return (
     <div>
       <Header style={{ backgroundColor: 'blue', opacity: '0.3' }} />
-      <Content />
       <Layout style={{ height: '100vh' }}>
         <Sider trigger={null}>
           <Menu theme="dark" mode="inline">
@@ -21,6 +20,13 @@ function MainPage() {
             </Menu.Item>
           </Menu>
         </Sider>
+        <Content style={{ margin: '24px 50px 0' }}>
+          <img
+            style={{ height: '200px', padding: '20px', marginLeft: '95px' }}
+            src="https://technofaq.org/wp-content/uploads/2019/08/word-image.gif"
+            alt=""
+          ></img>
+        </Content>
       </Layout>
     </div>
   );
