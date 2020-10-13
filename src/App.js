@@ -10,11 +10,15 @@ import MainPage from './MainPage';
 import ListUser from '../src/components/users/ListUser';
 import AddUser from '../src/components/users/AddUser';
 import { Button } from 'antd';
+import UpdateUser from './components/users/UpdateUser';
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/users/update/:id">
+          <UpdateUser />
+        </Route>
         <Route path="/users/add">
           <AddUser />
         </Route>
