@@ -84,12 +84,12 @@ function ListCom() {
     <Table
       columns={columns}
       dataSource={comments}
+      rowKey="id"
       size="middle"
       expandable={{
         expandedRowRender: (record) => (
           <p style={{ margin: 0 }}>{record.text}</p>
         ),
-        rowExpandable: (record) => record.name !== 'Not Expandable',
       }}
     />
   );
