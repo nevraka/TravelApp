@@ -1,0 +1,20 @@
+.header1 {
+  font-family: Muli, Futura, Helvetica, Arial, sans-serif;
+  margin-left: 20px;
+}
+.image {
+  height: 100px;
+  padding: 20px;
+  margin-left: 20px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-image: linear-gradient(
+    to top,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
+}

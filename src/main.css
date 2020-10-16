@@ -1,0 +1,26 @@
+.header {
+  background: linear-gradient(15deg, #13547a 0%, #80d0c7 100%) !important;
+  opacity: 0.3;
+}
+.lay {
+  height: 100vh;
+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+}
+.img {
+  height: 100vh;
+}
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-family: Georgia, serif;
+  justify-content: space-around;
+}
+.text {
+  width: 500px;
+}
+.menu {
+  font-family: Georgia, serif;
+  font-size: larger;
+  text-align: justify;
+}
