@@ -2,13 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
+import { Pagination } from 'antd';
 
 function ListUser() {
   const [users, setUsers] = useState([]);
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (_, value) => {
+    setPage(value / 5 + 1);
+  };
 
   const renderCell = (text, record) => (
     <Link to={`/users/update/${record.id}`}>{text}</Link>
   );
+
   const columns = [
     {
       title: 'Name',
@@ -33,13 +40,14 @@ function ListUser() {
       ),
     },
   ];
+
   useEffect(() => {
-    fetch('http://localhost:3000/users')
+    fetch(`http://localhost:3000/users?_page=${page}&_limit=5`)
       .then((response) => response.json())
       .then((results) => {
         setUsers(results);
       });
-  }, []);
+  }, [page]);
 
   const handleDelete = async (id) => {
     fetch(`http://localhost:3000/users/${id}`, {
@@ -64,15 +72,27 @@ function ListUser() {
   };
 
   return (
-    <Table
-      columns={columns}
-      dataSource={users}
-      size="middle"
-      expandable={{
-        expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.id}</p>,
-        rowExpandable: (record) => record.name !== 'Not Expandable',
-      }}
-    />
+    <>
+      <Table
+        className="table"
+        columns={columns}
+        dataSource={users}
+        size="middle"
+        expandable={{
+          expandedRowRender: (record) => (
+            <p style={{ margin: 0 }}>{record.id}</p>
+          ),
+          rowExpandable: (record) => record.name !== 'Not Expandable',
+        }}
+      />
+      <Pagination
+        defaultCurrent={1}
+        page={page}
+        onChange={handlePageChange}
+        pageSize={5}
+        total={8}
+      />
+    </>
   );
 }
 

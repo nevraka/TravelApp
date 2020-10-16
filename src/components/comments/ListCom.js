@@ -81,17 +81,19 @@ function ListCom() {
   };
 
   return (
-    <Table
-      columns={columns}
-      dataSource={comments}
-      rowKey="id"
-      size="middle"
-      expandable={{
-        expandedRowRender: (record) => (
-          <p style={{ margin: 0 }}>{record.text}</p>
-        ),
-      }}
-    />
+    <>
+      <Table
+        columns={columns}
+        dataSource={comments}
+        rowKey="id"
+        size="middle"
+        expandable={{
+          expandedRowRender: (record) => (
+            <p style={{ margin: 0 }}>{record.text}</p>
+          ),
+        }}
+      />
+    </>
   );
 }
 
