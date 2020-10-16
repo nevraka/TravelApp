@@ -18,3 +18,8 @@
     #e3eeff 100%
   );
 }
+.nav {
+  position: flex;
+  flex-direction: column;
+  float: right;
+}
