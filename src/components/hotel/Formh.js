@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Layout, Button, Row, Col } from 'antd';
-import Hdr from '../../Hdr';
 
 const { Footer, Content } = Layout;
 
@@ -21,7 +20,6 @@ const tailLayout = {
 function Formh({ handleSubmit, hotel, setHotel, buttonText }) {
   return (
     <div>
-      <Hdr />
       <Content>
         <Row>
           <Col offset={1} span={14}>
