@@ -13,14 +13,15 @@ import { Button } from 'antd';
 import UpdateUser from './components/users/UpdateUser';
 import Hdr from './Hdr';
 import { Layout, Menu } from 'antd';
+import Contact from './Contact';
 
 const { Sider, Content } = Layout;
 
 function App() {
   return (
     <>
-      <Hdr />
       <Router>
+        <Hdr />
         <Layout className="lay">
           <Sider trigger={null}>
             <Menu theme="dark" mode="inline" className="menu">
@@ -37,6 +38,9 @@ function App() {
           </Sider>
           <Content>
             <Switch>
+              <Route path="/contact">
+                <Contact />
+              </Route>
               <Route path="/users/update/:id">
                 <UpdateUser />
               </Route>
