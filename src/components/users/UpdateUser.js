@@ -19,7 +19,7 @@ function UpdateUser() {
       .then((result) => {
         setUser(result);
       });
-  }, []);
+  }, [id]);
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     fetch(`http://localhost:3000/users/${id}`, {

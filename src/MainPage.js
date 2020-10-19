@@ -1,6 +1,5 @@
 import React from 'react';
 import './main.css';
-import Hdr from './Hdr';
 
 function MainPage() {
   return (
@@ -8,6 +7,7 @@ function MainPage() {
       <img
         className="img"
         src="https://images.unsplash.com/photo-1530907487668-af02f65b4afe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+        alt=""
       ></img>
       <div className="text">
         World Wide Travel is one of the world’s largest and fastest-growing

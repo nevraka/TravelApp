@@ -19,7 +19,7 @@ function UpdateCom() {
       .then((result) => {
         setComment(result);
       });
-  }, []);
+  }, [id]);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();

@@ -13,10 +13,6 @@ const layout = {
   },
 };
 
-const tailLayout = {
-  wrapperCol: { offset: 3, span: 21 },
-};
-
 function Formh({ handleSubmit, hotel, setHotel, buttonText }) {
   return (
     <div>

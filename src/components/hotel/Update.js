@@ -20,7 +20,7 @@ function Update() {
       .then((result) => {
         setHotel(result);
       });
-  }, []);
+  }, [id]);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();

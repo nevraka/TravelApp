@@ -13,10 +13,6 @@ const layout = {
   },
 };
 
-const tailLayout = {
-  wrapperCol: { offset: 3, span: 21 },
-};
-
 function FormUser({ handleSubmit, user, setUser, buttonText }) {
   return (
     <div>
