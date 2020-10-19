@@ -14,10 +14,10 @@
   align-items: center;
   flex-direction: row;
   font-family: Georgia, serif;
-  justify-content: space-around;
 }
 .text {
-  width: 500px;
+  width: 100%;
+  padding: 0 20%;
 }
 .menu {
   font-family: Georgia, serif;
