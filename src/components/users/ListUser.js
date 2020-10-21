@@ -8,10 +8,6 @@ function ListUser() {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
 
-  const handlePageChange = (_, value) => {
-    setPage(value / 5 + 1);
-  };
-
   const renderCell = (text, record) => (
     <Link to={`/users/update/${record.id}`}>{text}</Link>
   );
@@ -78,6 +74,7 @@ function ListUser() {
         columns={columns}
         dataSource={users}
         size="middle"
+        pagination={false}
         expandable={{
           expandedRowRender: (record) => (
             <p style={{ margin: 0 }}>{record.id}</p>
@@ -88,9 +85,9 @@ function ListUser() {
       <Pagination
         defaultCurrent={1}
         page={page}
-        onChange={handlePageChange}
+        onChange={setPage}
         pageSize={5}
-        total={8}
+        total={15}
       />
     </>
   );

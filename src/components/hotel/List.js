@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import { Button } from 'antd';
+import { Pagination } from 'antd';
 
 function List() {
   const [hotels, setHotels] = useState([]);
+  const [page, setPage] = useState(1);
 
   const renderCell = (text, record) => (
     <Link to={`/hotels/update/${record.id}`}>{text}</Link>
@@ -40,10 +42,10 @@ function List() {
   ];
   useEffect(() => {
     loadData();
-  }, []);
+  }, [page]);
 
   const loadData = async () => {
-    fetch('http://localhost:3000/hotels')
+    fetch(`http://localhost:3000/hotels?_page=${page}&_limit=5`)
       .then((response) => response.json())
       .then((results) => {
         setHotels(results);
@@ -74,7 +76,19 @@ function List() {
 
   return (
     <div>
-      <Table columns={columns} dataSource={hotels} size="middle" />
+      <Table
+        pagination={false}
+        columns={columns}
+        dataSource={hotels}
+        size="middle"
+      />
+      <Pagination
+        defaultCurrent={1}
+        page={page}
+        onChange={setPage}
+        pageSize={5}
+        total={15}
+      />
     </div>
   );
 }
