@@ -1,10 +1,36 @@
 .background-image {
   min-width: 100%;
   height: 30vh;
-  background-image: linear-gradient(45deg, #6a78d1, #00a4bd),
+  background-image: linear-gradient(45deg, #445dff, #00a4bd),
     url('https://www.hubspot.com/hs-fs/hubfs/Contact%20Us/banner.jpg?width=1800&amp;name=banner.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-blend-mode: lighten;
+}
+
+.banner-message-1 {
+  text-align: center;
+  font-size: 2.875rem;
+  line-height: 1.30435em;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  padding-top: 70px;
+}
+.banner-message-2 {
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.61111em;
+  font-weight: 200;
+  color: rgb(0, 0, 0);
+  padding-top: 70px;
+}
+.cards {
+  padding: 20px;
+  padding-left: 100px;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  justify-content: space-evenly;
+  vertical-align: middle;
 }
