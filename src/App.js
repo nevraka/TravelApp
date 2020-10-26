@@ -14,6 +14,7 @@ import UpdateUser from './components/users/UpdateUser';
 import Hdr from './Hdr';
 import { Layout, Menu } from 'antd';
 import Contact from './Contact';
+import Footer from './Footer';
 
 const { Sider, Content } = Layout;
 
@@ -83,6 +84,7 @@ function App() {
             </Switch>
           </Content>
         </Layout>
+        <Footer />
       </Router>
     </>
   );
