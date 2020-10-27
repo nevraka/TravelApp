@@ -10,6 +10,7 @@ function ListUser() {
   const [page, setPage] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [deletingId, setDeletingId] = useState();
+  const [totalItems, setTotalItems] = useState(0);
 
   const renderCell = (text, record) => (
     <Link to={`/users/update/${record.id}`}>{text}</Link>
@@ -42,13 +43,16 @@ function ListUser() {
 
   useEffect(() => {
     fetch(`http://localhost:3000/users?_page=${page}&_limit=5`)
-      .then((response) => response.json())
+      .then((response) => {
+        setTotalItems(parseInt(response.headers.get('X-Total-Count')));
+        return response.json();
+      })
       .then((results) => {
         setUsers(results);
       });
   }, [page]);
 
-  const deleteItem = async (id) => {
+  const deleteItem = async () => {
     fetch(`http://localhost:3000/users/${deletingId}`, {
       method: 'DELETE',
       headers: {
@@ -58,7 +62,7 @@ function ListUser() {
     })
       .then((response) => {
         if (response.status === 200) {
-          const remaining = users.filter((h) => id !== h.id);
+          const remaining = users.filter((h) => deletingId !== h.id);
           setUsers(remaining);
         } else {
           throw `status code: ${response.status}`;
@@ -105,7 +109,7 @@ function ListUser() {
         page={page}
         onChange={setPage}
         pageSize={5}
-        total={15}
+        total={totalItems}
       />
       <Modal
         title="Are you sure?"

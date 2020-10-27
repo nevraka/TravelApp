@@ -10,6 +10,7 @@ function List() {
   const [page, setPage] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [deletingId, setDeletingId] = useState();
+  const [totalItems, setTotalItems] = useState(0);
 
   const renderCell = (text, record) => (
     <Link to={`/hotels/update/${record.id}`}>{text}</Link>
@@ -49,7 +50,10 @@ function List() {
 
   const loadData = async () => {
     fetch(`http://localhost:3000/hotels?_page=${page}&_limit=5`)
-      .then((response) => response.json())
+      .then((response) => {
+        setTotalItems(parseInt(response.headers.get('X-Total-Count')));
+        return response.json();
+      })
       .then((results) => {
         setHotels(results);
       });
@@ -103,7 +107,7 @@ function List() {
         page={page}
         onChange={setPage}
         pageSize={5}
-        total={15}
+        total={totalItems}
       />
       <Modal
         title="Are you sure?"

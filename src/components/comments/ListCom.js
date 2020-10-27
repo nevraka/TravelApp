@@ -10,6 +10,7 @@ function ListCom() {
   const [page, setPage] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [deletingId, setDeletingId] = useState();
+  const [totalItems, setTotalItems] = useState(0);
 
   const deleteItem = () => {
     fetch(`http://localhost:3000/comments/${deletingId}`, {
@@ -94,7 +95,10 @@ function ListCom() {
 
   const loadData = async () => {
     fetch(`http://localhost:3000/comments?_page=${page}&_limit=5`)
-      .then((response) => response.json())
+      .then((response) => {
+        setTotalItems(parseInt(response.headers.get('X-Total-Count')));
+        return response.json();
+      })
       .then((results) => {
         setComments(results);
       });
@@ -119,7 +123,7 @@ function ListCom() {
         page={page}
         onChange={setPage}
         pageSize={5}
-        total={15}
+        total={totalItems}
       />
       <Modal
         title="Are you sure?"
