@@ -16,7 +16,7 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 3, span: 21 },
 };
-function FormCom({ handleSubmit, comment, setComment }) {
+function FormCom({ handleSubmit, comment, setComment, buttonText }) {
   return (
     <div>
       <Content>
@@ -61,7 +61,7 @@ function FormCom({ handleSubmit, comment, setComment }) {
               </Form.Item>
               <Form.Item {...tailLayout}>
                 <Button type="primary" onClick={handleSubmit}>
-                  Add
+                  {buttonText}
                 </Button>
                 <Link to="/">
                   <Button>Back</Button>

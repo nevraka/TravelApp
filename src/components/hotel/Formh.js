@@ -45,7 +45,7 @@ function Formh({ handleSubmit, hotel, setHotel, buttonText }) {
               </Form.Item>
               <Form.Item>
                 <Button type="primary" onClick={handleSubmit}>
-                  Add
+                  {buttonText}
                 </Button>
                 <Link to="/">
                   <Button>Back</Button>

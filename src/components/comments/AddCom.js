@@ -20,6 +20,7 @@ function AddCom() {
   return (
     <div>
       <FormCom
+        buttonText="Add"
         handleSubmit={handleSubmit}
         comment={comment}
         setComment={setComment}
