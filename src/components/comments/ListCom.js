@@ -3,10 +3,51 @@ import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import { Button } from 'antd';
 import { Pagination } from 'antd';
+import { Modal } from 'antd';
 
 function ListCom() {
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [deletingId, setDeletingId] = useState();
+
+  const deleteItem = () => {
+    fetch(`http://localhost:3000/comments/${deletingId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          const remaining = comments.filter((c) => deletingId !== c.id);
+          setComments(remaining);
+        } else {
+          throw `status code: ${response.status}`;
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+        alert('An error accured');
+      });
+  };
+
+  const handleDelete = async (id) => {
+    setDeletingId(id);
+    setModalVisible(true);
+  };
+
+  const handleOk = (e) => {
+    console.log('OK clicked');
+    setModalVisible(false);
+    deleteItem();
+  };
+
+  const handleCancel = (e) => {
+    console.log('Cancel clicked');
+    setModalVisible(false);
+  };
 
   const renderCell = (text, record) => (
     <Link to={`/comments/update/${record.id}`}>{text}</Link>
@@ -59,28 +100,6 @@ function ListCom() {
       });
   };
 
-  const handleDelete = async (id) => {
-    fetch(`http://localhost:3000/comments/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          const remaining = comments.filter((c) => id !== c.id);
-          setComments(remaining);
-        } else {
-          throw `status code: ${response.status}`;
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-        alert('An error accured');
-      });
-  };
-
   return (
     <>
       <Table
@@ -101,6 +120,12 @@ function ListCom() {
         onChange={setPage}
         pageSize={5}
         total={15}
+      />
+      <Modal
+        title="Are you sure?"
+        visible={modalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
       />
     </>
   );

@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import { Button } from 'antd';
 import { Pagination } from 'antd';
+import { Modal } from 'antd';
 
 function List() {
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(1);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [deletingId, setDeletingId] = useState();
 
   const renderCell = (text, record) => (
     <Link to={`/hotels/update/${record.id}`}>{text}</Link>
@@ -52,8 +55,8 @@ function List() {
       });
   };
 
-  const handleDelete = async (id) => {
-    fetch(`http://localhost:3000/hotels/${id}`, {
+  const deleteItem = async (id) => {
+    fetch(`http://localhost:3000/hotels/${deletingId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
@@ -62,7 +65,7 @@ function List() {
     })
       .then((response) => {
         if (response.status === 200) {
-          const remaining = hotels.filter((h) => id !== h.id);
+          const remaining = hotels.filter((h) => deletingId !== h.id);
           setHotels(remaining);
         } else {
           throw `status code: ${response.status}`;
@@ -74,6 +77,19 @@ function List() {
       });
   };
 
+  const handleOk = (e) => {
+    console.log('OK clicked');
+    setModalVisible(false);
+    deleteItem();
+  };
+  const handleCancel = (e) => {
+    console.log('Cancel clicked');
+    setModalVisible(false);
+  };
+  const handleDelete = async (id) => {
+    setDeletingId(id);
+    setModalVisible(true);
+  };
   return (
     <div>
       <Table
@@ -88,6 +104,12 @@ function List() {
         onChange={setPage}
         pageSize={5}
         total={15}
+      />
+      <Modal
+        title="Are you sure?"
+        visible={modalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
       />
     </div>
   );

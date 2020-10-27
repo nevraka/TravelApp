@@ -3,10 +3,13 @@ import { Table } from 'antd';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { Pagination } from 'antd';
+import { Modal } from 'antd';
 
 function ListUser() {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [deletingId, setDeletingId] = useState();
 
   const renderCell = (text, record) => (
     <Link to={`/users/update/${record.id}`}>{text}</Link>
@@ -45,8 +48,8 @@ function ListUser() {
       });
   }, [page]);
 
-  const handleDelete = async (id) => {
-    fetch(`http://localhost:3000/users/${id}`, {
+  const deleteItem = async (id) => {
+    fetch(`http://localhost:3000/users/${deletingId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
@@ -65,6 +68,21 @@ function ListUser() {
         console.error(e);
         alert('An error accured');
       });
+  };
+  const handleDelete = async (id) => {
+    setDeletingId(id);
+    setModalVisible(true);
+  };
+
+  const handleOk = (e) => {
+    console.log('OK clicked');
+    setModalVisible(false);
+    deleteItem();
+  };
+
+  const handleCancel = (e) => {
+    console.log('Cancel clicked');
+    setModalVisible(false);
   };
 
   return (
@@ -88,6 +106,12 @@ function ListUser() {
         onChange={setPage}
         pageSize={5}
         total={15}
+      />
+      <Modal
+        title="Are you sure?"
+        visible={modalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
       />
     </>
   );
