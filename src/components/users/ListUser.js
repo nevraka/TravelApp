@@ -92,12 +92,12 @@ function ListUser() {
         columns={columns}
         dataSource={users}
         size="middle"
+        rowKey="id"
         pagination={false}
         expandable={{
           expandedRowRender: (record) => (
             <p style={{ margin: 0 }}>{record.id}</p>
           ),
-          rowExpandable: (record) => record.name !== 'Not Expandable',
         }}
       />
       <Pagination
