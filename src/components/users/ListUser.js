@@ -18,6 +18,11 @@ function ListUser() {
 
   const columns = [
     {
+      title: 'User ID',
+      dataIndex: 'id',
+      render: renderCell,
+    },
+    {
       title: 'Name',
       dataIndex: 'name',
       render: renderCell,
@@ -27,11 +32,7 @@ function ListUser() {
       dataIndex: 'address',
       render: renderCell,
     },
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      render: renderCell,
-    },
+
     {
       title: 'Action',
       key: 'action',
