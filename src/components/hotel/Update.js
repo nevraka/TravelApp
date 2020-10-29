@@ -38,9 +38,8 @@ function Update() {
     <div>
       <Formh
         buttonText="Update"
-        handleSubmit={handleSubmit}
-        hotel={hotel}
-        setHotel={setHotel}
+        formSubmit={handleSubmit}
+        initialUser={hotel}
       />
     </div>
   );

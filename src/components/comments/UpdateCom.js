@@ -36,8 +36,8 @@ function UpdateCom() {
   return (
     <FormCom
       buttonText="Update"
-      handleSubmit={handleSubmit}
-      comment={comment}
+      formSubmit={handleSubmit}
+      initialUser={comment}
       setComment={setComment}
     />
   );

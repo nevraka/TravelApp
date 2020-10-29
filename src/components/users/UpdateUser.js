@@ -3,8 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import FormUser from './FormUser';
 
 function UpdateUser() {
+  const { id } = useParams();
   const [user, setUser] = useState({});
-  let { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
@@ -20,8 +20,8 @@ function UpdateUser() {
         setUser(result);
       });
   }, [id]);
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
+
+  const handleSubmit = async (user) => {
     fetch(`http://localhost:3000/users/${id}`, {
       method: 'PUT',
       headers: {
@@ -36,9 +36,8 @@ function UpdateUser() {
     <div>
       <FormUser
         buttonText="Update"
-        handleSubmit={handleSubmit}
-        user={user}
-        setUser={setUser}
+        formSubmit={handleSubmit}
+        initialUser={user}
       />
     </div>
   );
