@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Layout, Button, Row, Col } from 'antd';
 import { DatePicker } from 'antd';
@@ -15,57 +15,61 @@ const layout = {
   },
 };
 
-const tailLayout = {
-  wrapperCol: { offset: 3, span: 21 },
-};
-function FormCom({ handleSubmit, comment, setComment, buttonText }) {
+function FormCom({ formSubmit, buttonText, initialUser, setComment }) {
+  const [form] = Form.useForm();
+  useEffect(() => {
+    form.setFieldsValue(initialUser);
+  }, [form, initialUser]);
+
+  const handleFormSubmit = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        formSubmit(values);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   return (
     <div>
       <Content>
         <Row>
           <Col offset={1} span={14}>
             <Form {...layout} style={{ height: '68vh' }}>
-              <Form.Item label="Hotel ID">
-                <Input
-                  type="text"
-                  value={comment.hotelId}
-                  onChange={(e) =>
-                    setComment({ ...comment, hotelId: e.target.value })
-                  }
-                />
+              <Form.Item
+                label="Hotel ID"
+                name="hotelId"
+                rules={[{ required: true }]}
+              >
+                <Input type="text" />
               </Form.Item>
-              <Form.Item label="User ID">
-                <Input
-                  type="text"
-                  value={comment.userId}
-                  onChange={(e) =>
-                    setComment({ ...comment, userId: e.target.value })
-                  }
-                />
+              <Form.Item
+                label="User ID"
+                name="userId"
+                rules={[{ required: true }]}
+              >
+                <Input type="text" />
               </Form.Item>
-              <Form.Item label="Text">
-                <Input
-                  type="text"
-                  value={comment.text}
-                  onChange={(e) =>
-                    setComment({ ...comment, text: e.target.value })
-                  }
-                />
+              <Form.Item label="Text" name="text">
+                <Input type="text" />
               </Form.Item>
-              <Form.Item label="Date">
+              <Form.Item label="Date" name="dateCreated">
                 <DatePicker
                   format="DD/MM/YYYY"
                   onChange={(d) =>
                     setComment({
-                      ...comment,
-                      dateCreated: d ? d.toISOString() : moment().toISOString(),
+                      ...initialUser,
+                      dateCreated: d
+                        ? d.toISOString()
+                        : moment(dateCreated).toISOString(),
                     })
                   }
-                  value={moment(comment.dateCreated)}
+                  value={moment(initialUser.dateCreated)}
                 />
               </Form.Item>
-              <Form.Item {...tailLayout}>
-                <Button type="primary" onClick={handleSubmit}>
+              <Form.Item>
+                <Button type="primary" onClick={handleFormSubmit}>
                   {buttonText}
                 </Button>
                 <Link to="/">
