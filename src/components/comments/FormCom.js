@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Layout, Button, Row, Col } from 'antd';
+import { DatePicker } from 'antd';
+import moment from 'moment';
 
 const { Footer, Content } = Layout;
 
@@ -51,12 +53,15 @@ function FormCom({ handleSubmit, comment, setComment, buttonText }) {
                 />
               </Form.Item>
               <Form.Item label="Date">
-                <Input
-                  type="text"
-                  value={comment.dateCreated}
-                  onChange={(e) =>
-                    setComment({ ...comment, dateCreated: e.target.value })
+                <DatePicker
+                  format="DD/MM/YYYY"
+                  onChange={(d) =>
+                    setComment({
+                      ...comment,
+                      dateCreated: d ? d.toISOString() : moment().toISOString(),
+                    })
                   }
+                  value={moment(comment.dateCreated)}
                 />
               </Form.Item>
               <Form.Item {...tailLayout}>
