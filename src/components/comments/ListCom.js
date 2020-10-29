@@ -56,7 +56,7 @@ function ListCom() {
 
   const columns = [
     {
-      title: 'ID',
+      title: 'Comment ID',
       dataIndex: 'id',
       render: renderCell,
     },
