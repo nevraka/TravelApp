@@ -45,10 +45,6 @@ function List() {
     },
   ];
   useEffect(() => {
-    loadData();
-  }, [page]);
-
-  const loadData = async () => {
     fetch(`http://localhost:3000/hotels?_page=${page}&_limit=5`)
       .then((response) => {
         setTotalItems(parseInt(response.headers.get('X-Total-Count')));
@@ -57,7 +53,7 @@ function List() {
       .then((results) => {
         setHotels(results);
       });
-  };
+  }, [page]);
 
   const deleteItem = async (id) => {
     fetch(`http://localhost:3000/hotels/${deletingId}`, {
@@ -72,7 +68,7 @@ function List() {
           const remaining = hotels.filter((h) => deletingId !== h.id);
           setHotels(remaining);
         } else {
-          throw `status code: ${response.status}`;
+          throw new Error(`status code: ${response.status}`);
         }
       })
       .catch((e) => {
