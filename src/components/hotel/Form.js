@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Layout, Button, Row, Col } from 'antd';
+import { Select } from 'antd';
+import countries from '../../data/countries.json';
 
+const { Option } = Select;
 const { Footer, Content } = Layout;
 
 const layout = {
@@ -45,8 +48,21 @@ function _Form({ formSubmit, buttonText, initialValue }) {
               <Form.Item label="City" name="city" rules={[{ required: true }]}>
                 <Input type="text" />
               </Form.Item>
-              <Form.Item label="Counrty" name="country">
-                <Input type="text" />
+              <Form.Item label="Country" name="country">
+                <Select
+                  showSearch
+                  style={{ width: 250 }}
+                  placeholder="Select country"
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {countries.map((counrty) => (
+                    <Option value={counrty.code}>{counrty.name}</Option>
+                  ))}
+                </Select>
               </Form.Item>
               <Form.Item>
                 <Button type="primary" onClick={handleFormSubmit}>
