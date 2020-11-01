@@ -1,16 +1,16 @@
 import React from 'react';
-import List from './components/hotel/List';
-import Add from './components/hotel/Add';
-import Update from './components/hotel/Update';
+import ListHotel from './components/hotel/List';
+import AddHotel from './components/hotel/Add';
+import UpdateHotel from './components/hotel/Update';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import ListCom from './components/comments/ListCom';
-import AddCom from './components/comments/AddCom';
-import UpdateCom from './components/comments/UpdateCom';
+import ListComment from './components/comments/List';
+import AddComment from './components/comments/Add';
+import UpdateComment from './components/comments/Update';
 import MainPage from './MainPage';
-import ListUser from '../src/components/users/ListUser';
-import AddUser from '../src/components/users/AddUser';
+import ListUser from '../src/components/users/List';
+import AddUser from '../src/components/users/Add';
 import { Button } from 'antd';
-import UpdateUser from './components/users/UpdateUser';
+import UpdateUser from './components/users/Update';
 import Hdr from './Hdr';
 import { Layout, Menu } from 'antd';
 import Contact from './Contact';
@@ -55,25 +55,25 @@ function App() {
                 </Link>
               </Route>
               <Route path="/hotels/update/:id">
-                <Update />
+                <UpdateHotel />
               </Route>
               <Route path="/hotels/add">
-                <Add />
+                <AddHotel />
               </Route>
               <Route path="/hotels">
-                <List />
+                <ListHotel />
                 <Link to="/hotels/add">
                   <Button>Add Hotel</Button>
                 </Link>
               </Route>
               <Route path="/comments/update/:id">
-                <UpdateCom />
+                <UpdateComment />
               </Route>
               <Route path="/comments/add">
-                <AddCom />
+                <AddComment />
               </Route>
               <Route path="/comments">
-                <ListCom />
+                <ListComment />
                 <Link to="/comments/add">
                   <Button>Add Comments</Button>
                 </Link>
