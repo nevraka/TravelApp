@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import Formh from './Formh';
+import Form from './Form';
 
 function Update() {
-  const [hotel, setHotel] = useState({});
+  const [initialValue, setInitialValue] = useState({});
   let { id } = useParams();
   const history = useHistory();
 
@@ -18,12 +18,11 @@ function Update() {
     })
       .then((response) => response.json())
       .then((result) => {
-        setHotel(result);
+        setInitialValue(result);
       });
   }, [id]);
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
+  const handleSubmit = async (hotel) => {
     fetch(`http://localhost:3000/hotels/${id}`, {
       method: 'PUT',
       headers: {
@@ -36,10 +35,10 @@ function Update() {
 
   return (
     <div>
-      <Formh
+      <Form
         buttonText="Update"
         formSubmit={handleSubmit}
-        initialUser={hotel}
+        initialValue={initialValue}
       />
     </div>
   );

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Formh from './Formh';
+import Form from './Form';
 import _ from 'lodash';
 
 const validate = (hotel) => {
@@ -11,11 +11,9 @@ const validate = (hotel) => {
 };
 
 function Add() {
-  const [hotel, setHotel] = useState({});
   const history = useHistory();
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (hotel) => {
     if (!validate(hotel)) {
       alert('Validation failed');
       return;
@@ -33,12 +31,7 @@ function Add() {
 
   return (
     <div>
-      <Formh
-        buttonText="Add"
-        handleSubmit={handleSubmit}
-        hotel={hotel}
-        setHotel={setHotel}
-      />
+      <Form buttonText="Add" handleSubmit={handleSubmit} />
     </div>
   );
 }
