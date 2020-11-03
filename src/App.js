@@ -74,9 +74,6 @@ function App() {
               </Route>
               <Route path="/comments">
                 <ListComment />
-                <Link to="/comments/add">
-                  <Button>Add Comments</Button>
-                </Link>
               </Route>
               <Route path="/">
                 <MainPage />

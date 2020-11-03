@@ -5,6 +5,8 @@ import { Button } from 'antd';
 import { Pagination } from 'antd';
 import { Modal } from 'antd';
 import moment from 'moment';
+import SearchBox from '../listHeader/SearchBox';
+import ListHeader from '../listHeader/ListHeader';
 
 function _List() {
   const [comments, setComments] = useState([]);
@@ -12,6 +14,7 @@ function _List() {
   const [modalVisible, setModalVisible] = useState(false);
   const [deletingId, setDeletingId] = useState();
   const [totalItems, setTotalItems] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const deleteItem = () => {
     fetch(`http://localhost:3000/comments/${deletingId}`, {
@@ -97,7 +100,11 @@ function _List() {
   ];
 
   useEffect(() => {
-    fetch(`http://localhost:3000/comments?_page=${page}&_limit=5`)
+    let url = `http://localhost:3000/comments?_page=${page}&_limit=5`;
+    if (searchTerm) {
+      url = url + `&q=${searchTerm}`;
+    }
+    fetch(url)
       .then((response) => {
         setTotalItems(parseInt(response.headers.get('X-Total-Count')));
         return response.json();
@@ -105,10 +112,11 @@ function _List() {
       .then((results) => {
         setComments(results);
       });
-  }, [page]);
+  }, [page, searchTerm]);
 
   return (
     <>
+      <ListHeader title="Comments" setSearchTerm={setSearchTerm}></ListHeader>
       <Table
         columns={columns}
         dataSource={comments}
