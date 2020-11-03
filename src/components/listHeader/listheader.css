@@ -1,0 +1,30 @@
+.list-header {
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.link {
+  white-space: nowrap;
+  padding: 0 10px;
+}
+.title h1 {
+  margin-bottom: 0;
+}
+.snap-right {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-left: 20px;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
+}
+
+.expanding:focus-within {
+  width: 100%;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
+}
+.expanding {
+  width: 400px;
+}
