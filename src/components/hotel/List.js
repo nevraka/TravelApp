@@ -45,7 +45,7 @@ function List() {
     },
   ];
   useEffect(() => {
-    fetch(`http://localhost:3000/hotels?_page=${page}&_limit=5`)
+    fetch(`http://localhost:3333/hotels?_page=${page}&_limit=5`)
       .then((response) => {
         setTotalItems(parseInt(response.headers.get('X-Total-Count')));
         return response.json();
@@ -56,7 +56,7 @@ function List() {
   }, [page]);
 
   const deleteItem = async (id) => {
-    fetch(`http://localhost:3000/hotels/${deletingId}`, {
+    fetch(`http://localhost:3333/hotels/${deletingId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',

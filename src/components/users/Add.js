@@ -6,7 +6,7 @@ function Add() {
   const history = useHistory();
 
   const handleSubmit = (user) => {
-    fetch('http://localhost:3000/users', {
+    fetch('http://localhost:3333/users', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

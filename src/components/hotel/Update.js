@@ -9,7 +9,7 @@ function Update() {
   const history = useHistory();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/hotels/${id}`, {
+    fetch(`http://localhost:3333/hotels/${id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -23,7 +23,7 @@ function Update() {
   }, [id]);
 
   const handleSubmit = async (hotel) => {
-    fetch(`http://localhost:3000/hotels/${id}`, {
+    fetch(`http://localhost:3333/hotels/${id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',

@@ -19,7 +19,7 @@ function Add() {
       return;
     }
 
-    fetch('http://localhost:3000/hotels', {
+    fetch('http://localhost:3333/hotels', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

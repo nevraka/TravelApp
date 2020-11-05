@@ -6,7 +6,7 @@ function Add() {
   const history = useHistory();
 
   const handleSubmit = (comment) => {
-    fetch('http://localhost:3000/comments', {
+    fetch('http://localhost:3333/comments', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

@@ -43,7 +43,7 @@ function List() {
   ];
 
   useEffect(() => {
-    fetch(`http://localhost:3000/users?_page=${page}&_limit=5`)
+    fetch(`http://localhost:3333/users?_page=${page}&_limit=5`)
       .then((response) => {
         setTotalItems(parseInt(response.headers.get('X-Total-Count')));
         return response.json();
@@ -54,7 +54,7 @@ function List() {
   }, [page]);
 
   const deleteItem = async () => {
-    fetch(`http://localhost:3000/users/${deletingId}`, {
+    fetch(`http://localhost:3333/users/${deletingId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',

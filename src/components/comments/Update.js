@@ -9,7 +9,7 @@ function Update() {
   const history = useHistory();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/comments/${id}`, {
+    fetch(`http://localhost:3333/comments/${id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -26,7 +26,7 @@ function Update() {
   }, [id]);
 
   const handleSubmit = async (comment) => {
-    fetch(`http://localhost:3000/comments/${id}`, {
+    fetch(`http://localhost:3333/comments/${id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',

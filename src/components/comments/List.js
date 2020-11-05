@@ -17,7 +17,7 @@ function _List() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const deleteItem = () => {
-    fetch(`http://localhost:3000/comments/${deletingId}`, {
+    fetch(`http://localhost:3333/comments/${deletingId}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
@@ -100,7 +100,7 @@ function _List() {
   ];
 
   useEffect(() => {
-    let url = `http://localhost:3000/comments?_page=${page}&_limit=5`;
+    let url = `http://localhost:3333/comments?_page=${page}&_limit=5`;
     if (searchTerm) {
       url = url + `&q=${searchTerm}`;
     }

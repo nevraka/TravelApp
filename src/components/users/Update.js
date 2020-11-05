@@ -8,7 +8,7 @@ function Update() {
   const history = useHistory();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/users/${id}`, {
+    fetch(`http://localhost:3333/users/${id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -22,7 +22,7 @@ function Update() {
   }, [id]);
 
   const handleSubmit = async (user) => {
-    fetch(`http://localhost:3000/users/${id}`, {
+    fetch(`http://localhost:3333/users/${id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
