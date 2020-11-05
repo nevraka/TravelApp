@@ -23,7 +23,7 @@ function App() {
     <>
       <Router>
         <Hdr />
-        <Layout className="lay">
+        <Layout className="main-layout">
           <Sider trigger={null}>
             <Menu theme="dark" mode="inline" className="menu">
               <Menu.Item key="1">
@@ -37,7 +37,7 @@ function App() {
               </Menu.Item>
             </Menu>
           </Sider>
-          <Content>
+          <Content className="main-content">
             <Switch>
               <Route path="/contact">
                 <Contact />
