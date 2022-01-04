@@ -5,7 +5,6 @@ import { Button } from 'antd';
 import { Pagination } from 'antd';
 import { Modal } from 'antd';
 import moment from 'moment';
-import SearchBox from '../listHeader/SearchBox';
 import ListHeader from '../listHeader/ListHeader';
 
 function _List() {
@@ -116,7 +115,11 @@ function _List() {
 
   return (
     <>
-      <ListHeader title="Comments" setSearchTerm={setSearchTerm}></ListHeader>
+      <ListHeader
+        title="Comments"
+        title_2="Add Comments"
+        setSearchTerm={setSearchTerm}
+      ></ListHeader>
       <Table
         columns={columns}
         dataSource={comments}
