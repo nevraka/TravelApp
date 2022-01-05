@@ -4,8 +4,9 @@ import { Table } from 'antd';
 import { Button } from 'antd';
 import { Pagination } from 'antd';
 import { Modal } from 'antd';
+import ListHeader from '../listHeader/ListHeader';
 
-function List() {
+function List({ setSearchTerm }) {
   const [hotels, setHotels] = useState([]);
   const [page, setPage] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
@@ -91,7 +92,12 @@ function List() {
     setModalVisible(true);
   };
   return (
-    <div>
+    <>
+      <ListHeader
+        title="Hotels"
+        title_2="Add Hotels"
+        setSearchTerm={setSearchTerm}
+      ></ListHeader>
       <Table
         pagination={false}
         columns={columns}
@@ -111,7 +117,7 @@ function List() {
         onOk={handleOk}
         onCancel={handleCancel}
       />
-    </div>
+    </>
   );
 }
 
